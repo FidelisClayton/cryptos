@@ -1,10 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
+
+import Header from './components/Header'
+import AccountSummary from './components/AccountSummary'
 
 class App extends Component {
   render() {
     return (
-      <h1>Hello React :)</h1>
-    );
+      <div>
+        <Header />
+        <AccountSummary />
+      </div>
+    )
   }
 }
-export default App;
+export default App

@@ -1,2 +1,13 @@
-// This is the top-level scss file. Import all other files in here.
-@import 'home';
+@import 'reset';
+
+@import 'functions/px-to-rem';
+
+@import 'vars/breakpoints';
+@import 'vars/colors';
+@import 'vars/general';
+
+@import 'mixins/media';
+
+@import 'container';
+@import 'components/header';
+@import 'components/account-summary';

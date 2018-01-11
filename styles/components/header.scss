@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $cobalt;
+  color: $white;
+  padding-bottom: $header-vertical-padding;
+  padding-top: $header-vertical-padding;
+  padding-left: $header-horizontal-padding;
+  padding-right: $header-horizontal-padding;
+
+  &__navigation {
+    max-width: $container-width;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  &__logo-wrapper {
+    font-size: px-to-rem(20px);
+  }
+}

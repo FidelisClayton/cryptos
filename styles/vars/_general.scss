@@ -1,0 +1,14 @@
+$default-font-size: 16px;
+$default-font-family: 'Open Sans', sans-serif !important;
+
+$index-rear: -1;
+$index-base: 0;
+$index-front: 10;
+$index-ahead: 100;
+$index-foremost: 9999;
+$container-width: #{$breakpoint-xl/$default-font-size}rem;
+
+$header-vertical-padding: px-to-rem(30px);
+$header-horizontal-padding: px-to-rem(100px);
+
+$summary-font-size: px-to-rem(40px);
