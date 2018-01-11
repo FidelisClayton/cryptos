@@ -1,0 +1,41 @@
+.content-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: px-to-rem(40px);
+  border-bottom: 1px solid $grey-1;
+  padding-top: px-to-rem(30px);
+  padding-bottom: px-to-rem(30px);
+
+  &__nav {
+    display: flex;
+  }
+
+  &__item {
+    margin-left: px-to-rem(20px);
+    margin-right: px-to-rem(20px);
+    border-radius: 30px;
+    padding-top: px-to-rem(15px);
+    padding-bottom: px-to-rem(15px);
+    padding-left: px-to-rem(30px);
+    padding-right: px-to-rem(30px);
+    cursor: pointer;
+
+    &--active {
+      background-color: $grey-1;
+    }
+
+    &:hover {
+      border: 2px solid #d2d2d2;
+      padding-top: px-to-rem(13px);
+      padding-bottom: px-to-rem(13px);
+      padding-left: px-to-rem(28px);
+      padding-right: px-to-rem(28px);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
