@@ -1,0 +1,20 @@
+.portfolio {
+  height: 40vh;
+
+  &__title {
+    text-align: center;
+    font-size: px-to-rem(50px);
+    padding: px-to-rem(60px);
+  }
+
+  &__chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: px-to-rem(10px);
+    max-width: $container-width;
+    height: px-to-rem(600px);
+    background-color: $grey-1;
+  }
+}

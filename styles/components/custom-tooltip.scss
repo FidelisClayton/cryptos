@@ -1,0 +1,17 @@
+.custom-tooltip {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border: px-to-rem(1px) solid $grey-1;
+  padding: px-to-rem(8px);
+  font-size: px-to-rem(14px);
+
+  &__date,
+  &__rentability,
+  &__profit {
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: px-to-rem(15px);
+    font-size: px-to-rem(12px);
+  }
+}
