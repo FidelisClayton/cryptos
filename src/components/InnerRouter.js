@@ -16,9 +16,9 @@ const InnerRouter = () => {
       <div>
         <ContentMenu />
 
-        <div className="portfolio">
-          <h2 className="portfolio__title">Your portfolio during <br /> the time</h2>
-          <div className="portfolio__chart-wrapper">
+        <div className="inner-content">
+          <h2 className="inner-content__title">Your portfolio during <br /> the time</h2>
+          <div className="inner-content__chart-wrapper">
             <Switch>
               <Route exact path="/" component={History}/>
               <Route path="/history" component={History}/>
