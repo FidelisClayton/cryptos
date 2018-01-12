@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 
 import Header from './components/Header'
 import AccountSummary from './components/AccountSummary'
-import ContentMenu from './components/ContentMenu'
-import Portfolio from './components/Portfolio'
+import InnerRouter from './components/InnerRouter'
 
 class App extends Component {
   render() {
@@ -11,8 +10,7 @@ class App extends Component {
       <div>
         <Header />
         <AccountSummary />
-        <ContentMenu />
-        <Portfolio />
+        <InnerRouter />
       </div>
     )
   }

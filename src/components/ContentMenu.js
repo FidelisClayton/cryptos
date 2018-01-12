@@ -1,35 +1,30 @@
 import React from 'react'
 
+import MenuItem from './MenuItem'
+
 const ContentMenu = () => {
+  const currentRoute = window.location.hash.replace('#', '')
+
   return (
     <nav className="content-menu">
       <ul className="content-menu__nav">
-        <li className="content-menu__item content-menu__item--active">
-          <a
-            className="content-menu__link"
-            href="#"
-          >
-            Portfolio
-          </a>
-        </li>
+        <MenuItem
+          label="Portfolio"
+          active={currentRoute === '/portfolio'}
+          route="/portfolio"
+        />
 
-        <li className="content-menu__item">
-          <a
-            className="content-menu__link"
-            href="#"
-          >
-            History
-          </a>
-        </li>
+        <MenuItem
+          label="History"
+          active={currentRoute === '/history'}
+          route="/history"
+        />
 
-        <li className="content-menu__item">
-          <a
-            className="content-menu__link"
-            href="#"
-          >
-            Market
-          </a>
-        </li>
+        <MenuItem
+          label="Market"
+          active={currentRoute === '/market'}
+          route="/market"
+        />
       </ul>
     </nav>
   )
