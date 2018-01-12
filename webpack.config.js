@@ -1,4 +1,8 @@
 var path = require('path');
+var neat = require('bourbon-neat').includePaths;
+var bourbon = require('node-bourbon').includePaths[1];
+
+console.log('neat >>>>', neat)
 
 module.exports = {
   devtool: 'eval',
@@ -12,15 +16,30 @@ module.exports = {
     publicPath: '/build/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?$/,
-        loaders: [ 'babel-loader' ],
+        use: [{
+          loader: 'babel-loader'
+        }],
         include: path.join(__dirname, 'src')
       },
       {
         test: /\.scss$/,
-        loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [ neat, bourbon ]
+            }
+          }
+        ]
       }
     ]
   }

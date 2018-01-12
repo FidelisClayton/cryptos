@@ -31,6 +31,8 @@
     "css-loader": "^0.28.0",
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^6.10.3",
+    "node-bourbon": "^4.2.8",
+    "node-neat": "^2.0.0-beta.0",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
@@ -39,7 +41,7 @@
   },
   "dependencies": {
     "babel-loader": "^7.0.0",
-    "bourbon-neat": "^1.9.0",
+    "bourbon-neat": "^2.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.2.2",

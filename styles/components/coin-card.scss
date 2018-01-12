@@ -1,0 +1,55 @@
+.coin-card {
+  @include grid-column(12);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: px-to-rem(30px);
+  padding-bottom: px-to-rem(30px);
+  border: px-to-rem(1px) solid $grey-2;
+  border-radius: px-to-rem(10px);
+  margin-bottom: px-to-rem(20px);
+
+  @include medium {
+    @include grid-column(6);
+  }
+
+  @include large {
+    @include grid-column(4);
+  }
+
+  @include extra-large {
+    @include grid-column(3);
+  }
+
+  &__icon {
+    width: px-to-rem(120px);
+    height: px-to-rem(120px);
+    border-radius: 50%;
+    background-color: $grey-2;
+    margin-bottom: px-to-rem(20px);
+  }
+
+  &__name {
+    font-size: px-to-rem(25px);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: px-to-rem(20px);
+  }
+
+  &__label {
+    display: block;
+    font-size: px-to-rem(16px);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 100;
+    margin-bottom: px-to-rem(5px);
+  }
+
+  &__amount {
+    display: block;
+    text-align: center;
+    font-size: px-to-rem(25px);
+  }
+}

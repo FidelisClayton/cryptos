@@ -7,6 +7,8 @@ import {
   Cell
 } from 'recharts'
 
+import CoinCard from './CoinCard'
+
 const data = [
   { name: 'Bitcoin', value: 2400 },
   { name: 'Ethereum', value: 4567 },
@@ -35,13 +37,22 @@ const Portfolio = () => {
             { data.map((entry, index) => (
                 <Cell
                   fill={COLORS[index % COLORS.length]}
-                  key={entry.value}
+                  key={`${entry.value}-${index}`}
                 />
               ))
             }
           </Pie>
           <Tooltip/>
         </PieChart>
+      </div>
+
+      <div className="portfolio__coin-cards">
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
+        <CoinCard />
       </div>
     </div>
   )

@@ -1,4 +1,6 @@
 @import 'reset';
+@import "~bourbon/app/assets/stylesheets/_bourbon";
+@import "~bourbon-neat/core/_neat.scss";
 
 @import 'functions/px-to-rem';
 
@@ -15,3 +17,4 @@
 @import 'components/portfolio';
 @import 'components/inner-content';
 @import 'components/custom-tooltip';
+@import 'components/coin-card';

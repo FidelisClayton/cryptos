@@ -1,6 +1,4 @@
 .inner-content {
-  height: 40vh;
-
   &__title {
     text-align: center;
     font-size: px-to-rem(50px);
@@ -14,7 +12,6 @@
     box-sizing: border-box;
     padding: px-to-rem(10px);
     max-width: $container-width;
-    height: px-to-rem(600px);
     background-color: $grey-1;
   }
 }
