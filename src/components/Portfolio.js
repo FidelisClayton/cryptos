@@ -20,6 +20,34 @@ const data = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
+const coins = [
+  {
+    coinId: 'bitcoin',
+    name: 'Bitcoin',
+    ammount: 500
+  },
+  {
+    coinId: 'ethereum',
+    name: 'Ethereum',
+    ammount: 200
+  },
+  {
+    coinId: 'substratum',
+    name: 'Substratum',
+    ammount: 300
+  },
+  {
+    coinId: 'tron',
+    name: 'Tron',
+    ammount: 120
+  },
+  {
+    coinId: 'red-plus',
+    name: 'Red Pulse',
+    ammount: 10
+  }
+]
+
 const Portfolio = () => {
   return (
     <div className="portfolio">
@@ -47,12 +75,13 @@ const Portfolio = () => {
       </div>
 
       <div className="portfolio__coin-cards">
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
-        <CoinCard />
+        { coins.map(coin => (
+            <CoinCard
+              key={coin.coinId}
+              {...coin}
+            />
+          ))
+        }
       </div>
     </div>
   )

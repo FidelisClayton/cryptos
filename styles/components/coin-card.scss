@@ -52,4 +52,20 @@
     text-align: center;
     font-size: px-to-rem(25px);
   }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__image {
+    max-width: px-to-rem(90px);
+    max-height: px-to-rem(90px);
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $black;
+  }
 }

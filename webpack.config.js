@@ -1,8 +1,8 @@
-var path = require('path');
-var neat = require('bourbon-neat').includePaths;
-var bourbon = require('node-bourbon').includePaths[1];
+const path = require('path');
+const neat = require('bourbon-neat').includePaths;
+const bourbon = require('node-bourbon').includePaths[1];
 
-console.log('neat >>>>', neat)
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -42,5 +42,10 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: path.join(__dirname, 'src', 'assets'), to: 'assets' }
+    ])
+  ]
 }
