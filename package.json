@@ -46,6 +46,7 @@
     "bourbon-neat": "^2.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-form": "^2.16.1",
     "react-router-dom": "^4.2.2",
     "recharts": "^1.0.0-beta.9"
   },

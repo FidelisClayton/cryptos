@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   PieChart,
@@ -78,7 +79,12 @@ const Portfolio = () => {
         <h2 className="portfolio__title">
           Your Coins <span className="portfolio__dropdown">card view</span>
         </h2>
-        <button className="portfolio__primary-button">Add new coin</button>
+        <Link
+          className="portfolio__primary-button"
+          to={'/new-order'}
+        >
+          Add new coin
+        </Link>
       </div>
 
       <div className="portfolio__coin-cards">

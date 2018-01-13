@@ -23,7 +23,7 @@ const ContentMenu = () => {
         <MenuItem
           label="Market"
           active={currentRoute === '/market'}
-          route="/market"
+          route="/order"
         />
       </ul>
     </nav>

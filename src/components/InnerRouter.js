@@ -1,10 +1,6 @@
 import React from 'react'
 
-import {
-  HashRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import ContentMenu from './ContentMenu'
 import History from './History'
@@ -12,22 +8,18 @@ import Portfolio from './Portfolio'
 
 const InnerRouter = () => {
   return (
-    <Router>
-      <div>
-        <ContentMenu />
+    <div>
+      <ContentMenu />
 
-        <div className="inner-content">
-          <h2 className="inner-content__title">Your portfolio during <br /> the time</h2>
-          <div className="inner-content__wrapper">
-            <Switch>
-              <Route exact path="/" component={History}/>
-              <Route path="/history" component={History}/>
-              <Route path="/portfolio" component={Portfolio}/>
-            </Switch>
-          </div>
+      <div className="inner-content">
+        <h2 className="inner-content__title">Your portfolio during <br /> the time</h2>
+        <div className="inner-content__wrapper">
+          <Route exact path="/" component={History}/>
+          <Route exact path="/history" component={History}/>
+          <Route exact path="/portfolio" component={Portfolio}/>
         </div>
       </div>
-    </Router>
+    </div>
   )
 }
 
