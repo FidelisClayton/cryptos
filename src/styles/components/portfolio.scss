@@ -1,12 +1,15 @@
 .portfolio {
-  display: flex;
+  @include grid-column(12);
+
+  max-width: px-to-rem(1200px);
   flex-direction: column;
 
   &__chart-wrapper {
+    @include grid-column(12);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 800px;
   }
 
   &__coin-cards {

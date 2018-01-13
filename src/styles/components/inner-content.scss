@@ -5,13 +5,12 @@
     padding: px-to-rem(60px);
   }
 
-  &__chart-wrapper {
+  &__wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     padding: px-to-rem(10px);
-    max-width: $container-width;
-    background-color: $grey-1;
+    background-color: $white;
   }
 }

@@ -26,6 +26,50 @@ const CoinCard = ({
           </Link>
         </h2>
 
+        <div className="coin-card__additional-info">
+          <div className="coin-card__info-item">
+            <label className="coin-card__label-mini">
+              24H
+            </label>
+
+            <span className="coin-card__value">
+              <span className="coin-card__percentage--loss">+</span>10%
+            </span>
+          </div>
+
+          <div className="coin-card__info-item">
+            <label className="coin-card__label-mini">
+              7D
+            </label>
+
+            <span className="coin-card__value">
+              <span className="coin-card__percentage--gain">+</span>10%
+            </span>
+          </div>
+        </div>
+
+        <div className="coin-card__additional-info">
+          <div className="coin-card__info-item">
+            <label className="coin-card__label-mini">
+              Gains
+            </label>
+
+            <span className="coin-card__value">
+              <span className="coin-card__percentage--loss">+</span>10%
+            </span>
+          </div>
+
+          <div className="coin-card__info-item">
+            <label className="coin-card__label-mini">
+              Profit
+            </label>
+
+            <span className="coin-card__value">
+              <span className="coin-card__percentage--gain">+</span>$20
+            </span>
+          </div>
+        </div>
+
         <label className="coin-card__label">
           Ammount
         </label>

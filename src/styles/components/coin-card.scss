@@ -38,13 +38,19 @@
     margin-bottom: px-to-rem(20px);
   }
 
-  &__label {
+  &__label,
+  &__label-mini {
     display: block;
     font-size: px-to-rem(16px);
     text-align: center;
     text-transform: uppercase;
     font-weight: 100;
     margin-bottom: px-to-rem(5px);
+  }
+
+  &__label-mini {
+    font-size: px-to-rem(12px);
+    text-align: center;
   }
 
   &__amount {
@@ -59,6 +65,10 @@
     align-items: center;
   }
 
+  &__info {
+    @include grid-collapse;
+  }
+
   &__image {
     max-width: px-to-rem(90px);
     max-height: px-to-rem(90px);
@@ -67,5 +77,29 @@
   &__link {
     text-decoration: none;
     color: $black;
+  }
+
+  &__additional-info {
+    @include grid-container;
+    @include grid-collapse;
+
+    margin-bottom: px-to-rem(15px);
+    margin-top: px-to-rem(15px);
+  }
+
+  &__info-item {
+    @include grid-column(6);
+
+    text-align: center;
+  }
+
+  &__percentage {
+    &--gain {
+      color: $positive-green;
+    }
+
+    &--loss {
+      color: $negative-red;
+    }
   }
 }
