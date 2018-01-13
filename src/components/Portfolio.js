@@ -74,6 +74,11 @@ const Portfolio = () => {
         </PieChart>
       </div>
 
+      <div className="portfolio__section-header">
+        <h2 className="portfolio__title">Your Coins</h2>
+        <button className="portfolio__primary-button">Add new coin</button>
+      </div>
+
       <div className="portfolio__coin-cards">
         { coins.map(coin => (
             <CoinCard

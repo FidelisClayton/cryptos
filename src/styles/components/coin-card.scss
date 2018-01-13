@@ -8,7 +8,7 @@
   padding-top: px-to-rem(30px);
   padding-bottom: px-to-rem(30px);
   border: px-to-rem(1px) solid $grey-2;
-  border-radius: px-to-rem(10px);
+  border-radius: $default-border-radius;
   margin-bottom: px-to-rem(20px);
 
   @include medium {

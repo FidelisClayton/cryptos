@@ -1,18 +1,48 @@
 .portfolio {
   @include grid-column(12);
-
-  max-width: px-to-rem(1200px);
-  flex-direction: column;
+  @include grid-collapse;
 
   &__chart-wrapper {
-    @include grid-column(12);
+    @include grid-collapse;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $grey-1;
   }
 
-  &__coin-cards {
-    @include grid-container
+  &__title {
+    @include grid-column(10);
+
+    text-align: left;
+    font-size: px-to-rem(30px);
+  }
+
+  &__primary-button {
+    @include grid-column(2);
+
+    color: $white;
+    background-color: $cobalt;
+    border: none;
+    border-radius: $button-border-radius;
+    padding-top: px-to-rem(10px);
+    padding-bottom: px-to-rem(10px);
+    font-size: px-to-rem(14px);
+    cursor: pointer;
+    outline: none;
+  }
+
+  &__section-header {
+    @include grid-container;
+
+    padding-top: px-to-rem(50px);
+    padding-bottom: px-to-rem(50px);
+  }
+
+  &__coin-cards,
+  &__section-header {
+    max-width: px-to-rem(1000px);
+    margin: 0 auto;
+    clear: both;
   }
 }
