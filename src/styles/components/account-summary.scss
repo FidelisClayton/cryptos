@@ -4,7 +4,9 @@
   align-items: center;
   justify-content: center;
   background-color: $grey-1;
-  height: 30vh;
+  min-height: 30vh;
+  padding-top: px-to-rem(30px);
+  padding-bottom: px-to-rem(30px);
 
   &__main-values {
     font-size: $summary-font-size;
