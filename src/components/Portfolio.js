@@ -75,7 +75,9 @@ const Portfolio = () => {
       </div>
 
       <div className="portfolio__section-header">
-        <h2 className="portfolio__title">Your Coins</h2>
+        <h2 className="portfolio__title">
+          Your Coins <span className="portfolio__dropdown">card view</span>
+        </h2>
         <button className="portfolio__primary-button">Add new coin</button>
       </div>
 
