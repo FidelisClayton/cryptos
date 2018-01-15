@@ -46,6 +46,8 @@
   "dependencies": {
     "babel-loader": "^7.0.0",
     "bourbon-neat": "^2.1.0",
+    "firebase": "^4.8.2",
+    "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "react": "^15.5.4",
     "react-autocomplete": "^1.7.2",

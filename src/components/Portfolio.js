@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import {
@@ -9,6 +9,8 @@ import {
 } from 'recharts'
 
 import CoinCard from './CoinCard'
+
+import { portfolioRef } from '../firebase'
 
 const data = [
   { name: 'Bitcoin', value: 2400 },
@@ -21,83 +23,73 @@ const data = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const coins = [
-  {
-    coinId: 'bitcoin',
-    name: 'Bitcoin',
-    ammount: 500
-  },
-  {
-    coinId: 'ethereum',
-    name: 'Ethereum',
-    ammount: 200
-  },
-  {
-    coinId: 'substratum',
-    name: 'Substratum',
-    ammount: 300
-  },
-  {
-    coinId: 'tron',
-    name: 'Tron',
-    ammount: 120
-  },
-  {
-    coinId: 'red-plus',
-    name: 'Red Pulse',
-    ammount: 10
+export default class Portfolio extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      portfolio: {}
+    }
   }
-]
 
-const Portfolio = () => {
-  return (
-    <div className="portfolio">
-      <div className="portfolio__chart-wrapper">
-        <PieChart
-          width={600}
-          height={400}
-        >
-          <Pie
-            data={data}
-            dataKey="value"
-            outerRadius={150}
-            fill="#82ca9d"
+  componentDidMount () {
+    portfolioRef.on('value', snapshot => {
+      this.setState({
+        portfolio: snapshot.val() || {}
+      })
+    })
+  }
+
+  render () {
+    const { portfolio } = this.state
+
+    return (
+      <div className="portfolio">
+        <div className="portfolio__chart-wrapper">
+          <PieChart
+            width={600}
+            height={400}
           >
-            { data.map((entry, index) => (
-                <Cell
-                  fill={COLORS[index % COLORS.length]}
-                  key={`${entry.value}-${index}`}
-                />
-              ))
-            }
-          </Pie>
-          <Tooltip/>
-        </PieChart>
-      </div>
+            <Pie
+              data={data}
+              dataKey="value"
+              outerRadius={150}
+              fill="#82ca9d"
+            >
+              { data.map((entry, index) => (
+                  <Cell
+                    fill={COLORS[index % COLORS.length]}
+                    key={`${entry.value}-${index}`}
+                  />
+                ))
+              }
+            </Pie>
+            <Tooltip/>
+          </PieChart>
+        </div>
 
-      <div className="portfolio__section-header">
-        <h2 className="portfolio__title">
-          Your Coins <span className="portfolio__dropdown">card view</span>
-        </h2>
-        <Link
-          className="portfolio__primary-button"
-          to={'/new-order'}
-        >
-          Add new coin
-        </Link>
-      </div>
+        <div className="portfolio__section-header">
+          <h2 className="portfolio__title">
+            Your Coins <span className="portfolio__dropdown">card view</span>
+          </h2>
+          <Link
+            className="portfolio__primary-button"
+            to={'/new-order'}
+          >
+            Add new coin
+          </Link>
+        </div>
 
-      <div className="portfolio__coin-cards">
-        { coins.map(coin => (
-            <CoinCard
-              key={coin.coinId}
-              {...coin}
-            />
-          ))
-        }
+        <div className="portfolio__coin-cards">
+          { Object.entries(portfolio).map(([ key, data ]) => (
+              <CoinCard
+                key={key}
+                {...data}
+              />
+            ))
+          }
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
-
-export default Portfolio

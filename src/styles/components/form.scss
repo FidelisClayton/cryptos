@@ -81,3 +81,28 @@
   display: block;
   width: 100%;
 }
+
+.c-radio-group {
+  display: flex;
+
+  &__button {
+    border: none;
+    padding-top: px-to-rem(10px);
+    padding-bottom: px-to-rem(10px);
+    font-size: px-to-rem(14px);
+    text-align: center;
+    display: flex;
+    border: px-to-rem(1px) solid $grey-2;
+    background-color: $white;
+    cursor: pointer;
+    outline: none;
+    display: block;
+    flex: 1;
+
+    &--selected,
+    &:hover {
+      border: px-to-rem(1px) solid $dodger-blue;
+      color: $dodger-blue;
+    }
+  }
+}

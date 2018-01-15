@@ -6,42 +6,27 @@ import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
 
 import InputGroup from './InputGroup'
+import RadioGroupButton from './RadioGroupButton'
 
-const languages = [
-  {
-    name: 'Bitcoin',
-    price: 123123
-  },
-  {
-    name: 'Bitcoin Cash',
-    year: 2012
-  },
-  {
-    name: 'Ethereum',
-    year: 2012
-  },
-  {
-    name: 'Tron',
-    year: 2012
-  },
-]
+import { getCoinData } from '../api'
+import { transactionsRef } from '../firebase'
+import { removeEmptyFields } from '../utils'
 
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase()
-  const inputLength = inputValue.length
-
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
-  )
-}
+const ORDER_TYPE_BUY = 'BUY'
+const ORDER_TYPE_SELL = 'SELL'
 
 const getSuggestionValue = suggestion => suggestion.name
 
-const renderSuggestion = suggestion => (
+const renderSuggestion = ({
+  name,
+  symbol
+}) => (
   <div>
-    {suggestion.name}
+    { name } ({ symbol })
   </div>
 )
+
+const coinRegex = suggestion => new RegExp(suggestion, "gi")
 
 export default class NewOrder extends Component {
   constructor () {
@@ -50,10 +35,28 @@ export default class NewOrder extends Component {
     this.state = {
       form: {
         coin: '',
-        startDate: moment()
+        date: moment(),
+        type: ORDER_TYPE_BUY
       },
-      suggestions: []
+      suggestions: [],
+      coins: []
     }
+  }
+
+  componentDidMount () {
+    getCoinData()
+      .then(data => this.setState({
+        coins: data
+      }))
+  }
+
+  getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase()
+    const inputLength = inputValue.length
+
+    return inputLength === 0 ? [] : this.state.coins.filter(coin => {
+      return coinRegex(inputValue).test(coin.name) || coinRegex(inputValue).test(coin.symbol)
+    })
   }
 
   onCoinChange = (event, { newValue }) => {
@@ -80,25 +83,62 @@ export default class NewOrder extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        startDate: date
+        date: date
       }
     })
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: this.getSuggestions(value).slice(0, 10)
     })
   }
 
-  onSuggestionsClearRequested = () => {
+  onSuggestionsClearRequested = (data) => {
     this.setState({
       suggestions: []
     })
   }
 
+  onSuggestionSelected = (event, { suggestion }) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        crypto: suggestion,
+        coin: suggestion.name
+      }
+    })
+  }
+
+  handleRadioClick = (orderType) => {
+    console.log('asdad')
+    this.setState({
+      form: {
+        ...this.state.form,
+        type: orderType
+      }
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
+
+    const { form } = this.state
+
+    transactionsRef.push(removeEmptyFields({
+      coin: form.crypto,
+      priceUSD: form.priceUSD,
+      priceBTC: form.priceBTC,
+      priceETH: form.priceETH,
+      purchaseDate: form.date.toDate(),
+      amount: form.amount,
+      type: form.type
+    }), error => {
+      if (!error) {
+      } else {
+        console.log(error)
+      }
+    })
   }
 
   render () {
@@ -124,6 +164,25 @@ export default class NewOrder extends Component {
           onSubmit={this.handleSubmit}
         >
           <InputGroup
+            label="Buy or sell?"
+          >
+            <div className="c-radio-group">
+              <RadioGroupButton
+                selected={this.state.form.type === ORDER_TYPE_BUY}
+                onClick={() => this.handleRadioClick(ORDER_TYPE_BUY)}
+              >
+                Buy
+              </RadioGroupButton>
+              <RadioGroupButton
+                selected={this.state.form.type === ORDER_TYPE_SELL}
+                onClick={() => this.handleRadioClick(ORDER_TYPE_SELL)}
+              >
+                Sell
+              </RadioGroupButton>
+            </div>
+          </InputGroup>
+
+          <InputGroup
             label="Coin"
           >
             <Autosuggest
@@ -131,6 +190,7 @@ export default class NewOrder extends Component {
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              onSuggestionSelected={this.onSuggestionSelected}
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
               inputProps={inputProps}
@@ -175,8 +235,9 @@ export default class NewOrder extends Component {
             label="Date"
           >
             <DatePicker
-              selected={this.state.form.startDate}
+              selected={this.state.form.date}
               onChange={this.onDatePickerChange}
+              dateFormat='DD/MM/YYYY'
             />
           </InputGroup>
 

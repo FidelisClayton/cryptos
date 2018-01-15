@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const CoinCard = ({
   coinId,
   name,
-  ammount
+  amount
 }) => {
   return (
     <div className="coin-card">
@@ -75,7 +75,7 @@ const CoinCard = ({
         </label>
 
         <span className="coin-card__amount">
-          US$ { ammount }
+          US$ { amount }
         </span>
       </div>
     </div>
@@ -85,7 +85,7 @@ const CoinCard = ({
 CoinCard.propTypes = {
   coinId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  ammount: PropTypes.number.isRequired
+  amount: PropTypes.number.isRequired
 }
 
 export default CoinCard
