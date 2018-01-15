@@ -1,6 +1,7 @@
 const path = require('path');
 const neat = require('bourbon-neat').includePaths;
 const bourbon = require('node-bourbon').includePaths[1];
+const globImporter = require('node-sass-glob-importer');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -36,9 +37,21 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [ neat, bourbon ]
+              includePaths: [ neat, bourbon ],
+              importer: globImporter()
             }
           }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
         ]
       }
     ]

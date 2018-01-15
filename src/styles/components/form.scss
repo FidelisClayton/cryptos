@@ -1,0 +1,83 @@
+.c-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: px-to-rem(10px);
+  font-size: px-to-rem(18px);
+
+  &__label {
+    padding-top: px-to-rem(15px);
+    padding-bottom: px-to-rem(15px);
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  &__input {
+    padding-top: px-to-rem(12px);
+    padding-bottom: px-to-rem(12px);
+    padding-right: px-to-rem(10px);
+    padding-left: px-to-rem(10px);
+    border: px-to-rem(1px) solid $grey-2;
+    font-size: px-to-rem(18px);
+    outline: none;
+
+    &--error {
+      border: px-to-rem(1px) solid $negative-red;
+    }
+
+    &:focus {
+      border: px-to-rem(1px) solid $cobalt;
+    }
+  }
+}
+
+.c-submit-wrapper {
+  margin-top: px-to-rem(30px);
+}
+
+.react-autosuggest {
+  &__suggestion {
+    padding-top: px-to-rem(12px);
+    padding-bottom: px-to-rem(12px);
+    padding-right: px-to-rem(10px);
+    padding-left: px-to-rem(10px);
+    background: white;
+    border: px-to-rem(1px) solid $grey-2;
+    width: calc(100% - 20px);
+
+    &--first {
+      border-top: none;
+    }
+
+    &--highlighted {
+      background-color: $grey-1;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.react-autosuggest__input,
+.react-datepicker__input-container input {
+  padding-top: px-to-rem(12px);
+  padding-bottom: px-to-rem(12px);
+  padding-right: px-to-rem(10px);
+  padding-left: px-to-rem(10px);
+  border: px-to-rem(1px) solid $grey-2;
+  font-size: px-to-rem(18px);
+  outline: none;
+  width: calc(100% - 20px);
+  display: block;
+
+  &:focus {
+    border: px-to-rem(1px) solid $cobalt;
+  }
+}
+
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  display: block;
+  width: 100%;
+}

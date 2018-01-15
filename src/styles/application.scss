@@ -2,20 +2,12 @@
 @import "~bourbon/app/assets/stylesheets/_bourbon";
 @import "~bourbon-neat/core/_neat.scss";
 
-@import 'functions/px-to-rem';
+@import 'functions/**/*';
 
-@import 'vars/breakpoints';
-@import 'vars/colors';
-@import 'vars/general';
-@import 'utilities';
-
-@import 'mixins/media';
+@import 'vars/**/*';
+@import 'mixins/**/*';
 
 @import 'container';
-@import 'components/header';
-@import 'components/account-summary';
-@import 'components/content-menu';
-@import 'components/portfolio';
-@import 'components/inner-content';
-@import 'components/custom-tooltip';
-@import 'components/coin-card';
+@import 'utilities';
+
+@import 'components/**/*'
