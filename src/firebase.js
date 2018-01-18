@@ -16,6 +16,9 @@ export const getUserUid = () =>
   _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
 
 export const db = firebase.database()
+export const storage = firebase.storage()
+
+export const coinsRef = storage.ref('coins')
 
 export const portfolioRef = () => {
   const ref = `users/${getUserUid()}/portfolio`
