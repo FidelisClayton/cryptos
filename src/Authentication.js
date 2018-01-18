@@ -35,6 +35,7 @@ export default class Auth extends Component {
               />
 
               <Route
+                exact
                 path="/register"
                 component={Register}
               />

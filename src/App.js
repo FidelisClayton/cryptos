@@ -2,33 +2,52 @@ import React, { Component } from 'react'
 
 import {
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom'
 
-import Header from './components/Header'
+import {
+  auth,
+  STORAGE_KEY
+} from './firebase'
+
+import Authentication from './Authentication'
 import Home from './components/Home'
 import NewOrder from './components/NewOrder'
+import MatchWhenAuthorized from './components/MatchWhenAuthorized'
 
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
-      user: null
+      uid: null
     }
+  }
+
+  componentDidMount () {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        window.localStorage.setItem(STORAGE_KEY, user.uid)
+        this.setState({ uid: user.uid })
+      } else {
+        window.localStorage.removeItem(STORAGE_KEY)
+        this.setState({ uid: null })
+      }
+    })
   }
 
   render() {
     return (
       <div>
-        <Header user={this.state.user} />
         <Switch>
-          <Route path="/new-order" component={NewOrder} />
-          <Route path="/" component={Home} />
+          <MatchWhenAuthorized path="/new-order" component={NewOrder} />
+          <MatchWhenAuthorized path="/home" component={Home} />
+          <Route path="/" component={Authentication} />
         </Switch>
       </div>
     )
   }
 }
+
 
 export default App

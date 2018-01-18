@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { auth } from '../firebase'
+
 const Header = props => {
   return (
     <header className="header">
@@ -14,6 +16,14 @@ const Header = props => {
             { props.user &&
               <li className="header__nav-item">{ props.user.displayName }</li>
             }
+            <li className="header__nav-item">
+              <button
+                className="button__primary"
+                onClick={() => auth.signOut()}
+              >
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
       </div>

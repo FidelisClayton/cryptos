@@ -1,13 +1,13 @@
 import React from 'react'
 
-import AccountSummary from './AccountSummary'
-import InnerRouter from './InnerRouter'
+import HomeRouter from './HomeRouter'
+import Header from './Header'
 
 const Home = () => {
   return (
     <div>
-      <AccountSummary />
-      <InnerRouter />
+      <Header />
+      <HomeRouter />
     </div>
   )
 }

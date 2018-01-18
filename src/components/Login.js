@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
-import { auth } from '../firebase'
+import {
+  auth,
+  isAuthenticated
+} from '../firebase'
 
 import InputGroup from './InputGroup'
 
@@ -13,7 +17,8 @@ export default class Login extends Component {
     this.state = {
       email: null,
       password: null,
-      error: null
+      error: null,
+      redirectToHome: false
     }
   }
 
@@ -33,9 +38,7 @@ export default class Login extends Component {
     auth.signInWithEmailAndPassword(email, password)
       .then(response => {
         this.setState({
-          email: null,
-          password: null,
-          error: null
+          redirectToHome: true
         })
       })
       .catch(error => {
@@ -57,8 +60,16 @@ export default class Login extends Component {
   }
 
   render () {
+    const { from } = this.props.location.state || '/'
+    const { redirectToHome } = this.state
+
     return (
       <div className="login">
+        { redirectToHome && (
+            <Redirect to={from || '/home'} />
+          )
+        }
+
         <div className="auth__wrapper">
           <h2 className="heading u-text-center">Welcome back to Cryptus!</h2>
           <h3 className="heading-description u-text-center">Login with your email and password to proceed to the application</h3>

@@ -10,26 +10,26 @@ const ContentMenu = () => {
       <ul className="content-menu__nav">
         <MenuItem
           label="Portfolio"
-          active={currentRoute === '/portfolio'}
-          route="/portfolio"
+          active={currentRoute === '/home/portfolio'}
+          route="/home/portfolio"
         />
 
         <MenuItem
           label="History"
-          active={currentRoute === '/history'}
-          route="/history"
+          active={currentRoute === '/home/history'}
+          route="/home/history"
         />
 
         <MenuItem
           label="Market"
-          active={currentRoute === '/market'}
-          route="/order"
+          active={currentRoute === '/home/market'}
+          route="/home/order"
         />
 
         <MenuItem
           label="Transactions"
-          active={currentRoute === '/transactions'}
-          route="/transactions"
+          active={currentRoute === '/home/transactions'}
+          route="/home/transactions"
         />
       </ul>
     </nav>

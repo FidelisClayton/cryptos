@@ -15,10 +15,10 @@ const InnerRouter = () => {
       <div className="inner-content">
         <h2 className="inner-content__title">Your portfolio during <br /> the time</h2>
         <div className="inner-content__wrapper">
-          <Route exact path="/" component={History}/>
-          <Route exact path="/history" component={History}/>
-          <Route exact path="/portfolio" component={Portfolio}/>
-          <Route exact path="/transactions" component={Transactions}/>
+          <Route exact path="/home" component={History}/>
+          <Route exact path="/home/history" component={History}/>
+          <Route exact path="/home/portfolio" component={Portfolio}/>
+          <Route exact path="/home/transactions" component={Transactions}/>
         </div>
       </div>
     </div>
