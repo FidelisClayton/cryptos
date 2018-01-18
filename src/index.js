@@ -2,6 +2,7 @@ require('./styles/application.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { IntlProvider } from 'react-intl'
 
 import {
   HashRouter as Router
@@ -10,7 +11,9 @@ import {
 import App from './App';
 
 ReactDOM.render((
-  <Router>
-    <App />
-  </Router>
+  <IntlProvider locale="en">
+    <Router>
+      <App />
+    </Router>
+  </IntlProvider>
 ), document.getElementById('react-root'));

@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import moment from 'moment'
+
+import {
+  FormattedNumber,
+  FormattedDate
+} from 'react-intl'
 
 import { transactionsRef } from '../firebase'
 
@@ -19,12 +25,47 @@ export default class Transactions extends Component {
 
   renderTransactions (transactions) {
     return Object.entries(transactions).map(([ key, transaction ]) => (
-      <tr key={key}>
-        <td>{ transaction.coin.name } ({ transaction.coin.symbol})</td>
-        <td>{ transaction.priceUSD }</td>
-        <td>{ transaction.priceBTC }</td>
-        <td>{ transaction.priceETH }</td>
-        <td>{ transaction.date }</td>
+      <tr
+        className="table__row"
+        key={key}
+      >
+        <td className="table__data">{ transaction.coin.name } ({ transaction.coin.symbol})</td>
+        <td className="table__data">{ transaction.type }</td>
+        <td className="table__data u-text-center">
+          <FormattedNumber
+            value={transaction.priceUSD}
+            style="currency"
+            currency="USD"
+            minimumFractionDigits={2}
+          />
+        </td>
+        <td className="table__data u-text-center">
+          { transaction.priceBTC
+              ? (
+                <FormattedNumber
+                  value={transaction.priceBTC}
+                  style="currency"
+                  minimumFractionDigits={8}
+                />
+              )
+              : '-'
+          }
+        </td>
+        <td className="table__data u-text-center">
+          { transaction.priceETH
+              ? (
+                <FormattedNumber
+                  value={transaction.priceETH}
+                  style="currency"
+                  minimumFractionDigits={8}
+                />
+              )
+              : '-'
+          }
+        </td>
+        <td className="table__data u-text-center">
+          { moment(transaction.purchaseDate).format('hh:mm on DD/MM/YYYY') }
+        </td>
       </tr>
     ))
   }
@@ -32,22 +73,25 @@ export default class Transactions extends Component {
   render () {
     return (
       <div className="transactions">
-        <table className="transactions__table">
+        <table className="table">
           <thead>
             <tr>
-              <th>
+              <th className="table__head">
                 Coin
               </th>
-              <th>
-                Price (USD)
+              <th className="table__head">
+                Type
               </th>
-              <th>
-                Price (BTC)
+              <th className="table__head u-text-center">
+                Price <br /> <small className="table__small">(USD)</small>
               </th>
-              <th>
-                Price (ETH)
+              <th className="table__head u-text-center">
+                Price <br /> <small className="table__small">(BTC)</small>
               </th>
-              <th>
+              <th className="table__head u-text-center">
+                Price <br /> <small className="table__small">(ETH)</small>
+              </th>
+              <th className="table__head u-text-center">
                 Date
               </th>
             </tr>

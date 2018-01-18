@@ -1,0 +1,8 @@
+.transactions {
+  @include grid-column(12);
+  @include grid-collapse;
+
+  max-width: px-to-rem(1000px);
+  margin: 0 auto;
+  clear: both;
+}
