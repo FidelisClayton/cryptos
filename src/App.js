@@ -40,7 +40,6 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <MatchWhenAuthorized path="/new-order" component={NewOrder} />
           <MatchWhenAuthorized path="/home" component={Home} />
           <Route path="/" component={Authentication} />
         </Switch>

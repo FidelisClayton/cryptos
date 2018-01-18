@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { auth } from '../firebase'
 
 const Header = props => {
@@ -8,7 +10,9 @@ const Header = props => {
       <div className="header__navigation">
         <div className="header__left">
           <div className="header__logo-wrapper">
-            <h2 className="header__logo">Crypto</h2>
+            <Link to="/home">
+              <h2 className="header__logo">Crypto</h2>
+            </Link>
           </div>
         </div>
         <div className="header__right">

@@ -33,7 +33,7 @@ export default class Portfolio extends Component {
   }
 
   componentDidMount () {
-    portfolioRef.on('value', snapshot => {
+    portfolioRef().on('value', snapshot => {
       this.setState({
         portfolio: snapshot.val() || {}
       })
@@ -74,7 +74,7 @@ export default class Portfolio extends Component {
           </h2>
           <Link
             className="portfolio__primary-button"
-            to={'/new-order'}
+            to={'/home/new-order'}
           >
             Add new coin
           </Link>

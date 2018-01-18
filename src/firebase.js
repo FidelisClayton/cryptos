@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import _ from 'lodash'
 
 const config = {
   apiKey: 'AIzaSyCpFAtOGTMaILlWkRCYachGte-fKjM00U8',
@@ -11,14 +12,26 @@ const config = {
 
 firebase.initializeApp(config)
 
+const getUserUid = () =>
+  _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
+
 export const db = firebase.database()
-export const portfolioRef = db.ref().child('portfolio')
-export const transactionsRef = db.ref().child('transactions')
+
+export const portfolioRef = () => {
+  const ref = `users/${getUserUid()}/portfolio`
+
+  return db.ref().child(ref)
+}
+
+export const transactionsRef = () => {
+  const ref = `users/${getUserUid()}/transactions`
+
+  return db.ref().child(ref)
+}
 
 export const auth = firebase.auth()
-export const provider = new firebase.auth.GoogleAuthProvider()
 
-export const STORAGE_KEY = 'KEY_FOR_LOCAL_STORAGE'
+export const STORAGE_KEY = 'CRYPTUS'
 
 export const isAuthenticated = () => {
   return !!auth.currentUser || !!window.localStorage.getItem(STORAGE_KEY)

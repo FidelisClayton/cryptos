@@ -124,7 +124,7 @@ export default class NewOrder extends Component {
 
     const { form } = this.state
 
-    transactionsRef.push(removeEmptyFields({
+    transactionsRef().push(removeEmptyFields({
       coin: form.crypto,
       priceUSD: form.priceUSD,
       priceBTC: form.priceBTC,

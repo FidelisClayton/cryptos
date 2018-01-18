@@ -11,7 +11,7 @@ import Main from './Main'
 const HomeRouter = () => {
   return (
     <Switch>
-      <Route path="/new-order" component={NewOrder} />
+      <Route path="/home/new-order" component={NewOrder} />
       <Route path="/home" component={Main} />
     </Switch>
   )

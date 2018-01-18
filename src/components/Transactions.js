@@ -12,7 +12,7 @@ export default class Transactions extends Component {
   }
 
   componentDidMount () {
-    transactionsRef.on('value', snapshot => {
+    transactionsRef().on('value', snapshot => {
       this.setState({ transactions: snapshot.val() })
     })
   }
