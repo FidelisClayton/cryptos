@@ -9,8 +9,13 @@ import InputGroup from './InputGroup'
 import RadioGroupButton from './RadioGroupButton'
 
 import { getCoinData } from '../api'
-import { transactionsRef } from '../firebase'
+import {
+  transactionsRef,
+  getUserUid
+} from '../firebase'
+
 import { removeEmptyFields } from '../utils'
+import { buildPortfolio } from '../api'
 
 const ORDER_TYPE_BUY = 'BUY'
 const ORDER_TYPE_SELL = 'SELL'
@@ -134,6 +139,7 @@ export default class NewOrder extends Component {
       type: form.type,
     }), error => {
       if (!error) {
+        buildPortfolio(getUserUid())
       } else {
         console.log(error)
       }

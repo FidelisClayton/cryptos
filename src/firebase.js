@@ -12,7 +12,7 @@ const config = {
 
 firebase.initializeApp(config)
 
-const getUserUid = () =>
+export const getUserUid = () =>
   _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
 
 export const db = firebase.database()

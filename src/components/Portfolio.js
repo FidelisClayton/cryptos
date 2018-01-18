@@ -10,7 +10,12 @@ import {
 
 import CoinCard from './CoinCard'
 
-import { portfolioRef } from '../firebase'
+import {
+  portfolioRef,
+  getUserUid
+} from '../firebase'
+
+import { buildPortfolio, } from '../api'
 
 const data = [
   { name: 'Bitcoin', value: 2400 },
@@ -38,6 +43,8 @@ export default class Portfolio extends Component {
         portfolio: snapshot.val() || {}
       })
     })
+
+    buildPortfolio(getUserUid())
   }
 
   render () {
@@ -84,6 +91,7 @@ export default class Portfolio extends Component {
           { Object.entries(portfolio).map(([ key, data ]) => (
               <CoinCard
                 key={key}
+                coinId={key}
                 {...data}
               />
             ))

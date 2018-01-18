@@ -2,10 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import { askImage } from '../api'
+
+const onImageError = coinId => {
+  askImage(coinId)
+}
+
 const CoinCard = ({
   coinId,
   name,
-  amount
+  amount,
+  day,
+  week,
+  hour
 }) => {
   return (
     <div className="coin-card">
@@ -13,6 +22,7 @@ const CoinCard = ({
         <img
           src={`dist/assets/images/coins/${coinId}.svg`}
           className="coin-card__image"
+          onError={() => onImageError(coinId)}
         />
       </div>
 
@@ -33,7 +43,14 @@ const CoinCard = ({
             </label>
 
             <span className="coin-card__value">
-              <span className="coin-card__percentage--loss">+</span>10%
+              { day > 0
+                  ? (
+                    <span><span className="coin-card__percentage--gain">+</span>{ day }%</span>
+                  )
+                  : (
+                    <span><span className="coin-card__percentage--loss">-</span>{ day * -1 }%</span>
+                  )
+              }
             </span>
           </div>
 
@@ -43,7 +60,14 @@ const CoinCard = ({
             </label>
 
             <span className="coin-card__value">
-              <span className="coin-card__percentage--gain">+</span>10%
+              { week > 0
+                  ? (
+                    <span><span className="coin-card__percentage--gain">+</span>{ week }%</span>
+                  )
+                  : (
+                    <span><span className="coin-card__percentage--loss">-</span>{ week * -1 }%</span>
+                  )
+              }
             </span>
           </div>
         </div>
