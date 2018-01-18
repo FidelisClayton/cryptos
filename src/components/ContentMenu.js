@@ -25,6 +25,12 @@ const ContentMenu = () => {
           active={currentRoute === '/market'}
           route="/order"
         />
+
+        <MenuItem
+          label="Transactions"
+          active={currentRoute === '/transactions'}
+          route="/transactions"
+        />
       </ul>
     </nav>
   )

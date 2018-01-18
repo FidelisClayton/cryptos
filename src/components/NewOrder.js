@@ -111,7 +111,6 @@ export default class NewOrder extends Component {
   }
 
   handleRadioClick = (orderType) => {
-    console.log('asdad')
     this.setState({
       form: {
         ...this.state.form,
@@ -130,9 +129,9 @@ export default class NewOrder extends Component {
       priceUSD: form.priceUSD,
       priceBTC: form.priceBTC,
       priceETH: form.priceETH,
-      purchaseDate: form.date.toDate(),
+      purchaseDate: form.date.toISOString(),
       amount: form.amount,
-      type: form.type
+      type: form.type,
     }), error => {
       if (!error) {
       } else {
@@ -244,7 +243,7 @@ export default class NewOrder extends Component {
           <div className="c-submit-wrapper">
             <button
               type="submit"
-              className="button--primary"
+              className="button__primary"
             >
               Submit
             </button>

@@ -19,15 +19,21 @@
 }
 
 .button {
-  &--dark {
+  &__dark {
     @include button {
       background-color: $black;
     }
   }
 
-  &--primary {
+  &__primary {
     @include button {
       background-color: $cobalt;
     }
+  }
+
+  &--small {
+    padding-top: px-to-rem(8px);
+    padding-bottom: px-to-rem(8px);
+    font-size: px-to-rem(14px);
   }
 }

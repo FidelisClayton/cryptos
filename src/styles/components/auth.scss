@@ -1,0 +1,37 @@
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    max-width: px-to-rem(600px);
+    padding: px-to-rem(20px);
+  }
+
+  &__login-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    max-width: px-to-rem(300px);
+    margin-top: px-to-rem(30px);
+  }
+
+  &__submit {
+    margin-top: px-to-rem(15px);
+  }
+
+  &__error {
+    padding-top: px-to-rem(20px);
+    padding-bottom: px-to-rem(20px);
+    margin-top: 0;
+    text-align: center;
+    color: $negative-red;
+  }
+}

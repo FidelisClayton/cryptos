@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = () => {
+const Header = props => {
   return (
     <header className="header">
       <div className="header__navigation">
@@ -11,7 +11,9 @@ const Header = () => {
         </div>
         <div className="header__right">
           <ul className="header__nav">
-            <li className="header__nav-item">Clayton Fidelis</li>
+            { props.user &&
+              <li className="header__nav-item">{ props.user.displayName }</li>
+            }
           </ul>
         </div>
       </div>

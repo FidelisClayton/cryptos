@@ -1,6 +1,7 @@
 .c-input-group {
   display: flex;
   flex-direction: column;
+  flex: 1;
   margin-bottom: px-to-rem(10px);
   font-size: px-to-rem(18px);
 
@@ -19,6 +20,12 @@
     border: px-to-rem(1px) solid $grey-2;
     font-size: px-to-rem(18px);
     outline: none;
+
+    &--small {
+      padding-top: px-to-rem(9px);
+      padding-bottom: px-to-rem(9px);
+      font-size: px-to-rem(14px);
+    }
 
     &--error {
       border: px-to-rem(1px) solid $negative-red;

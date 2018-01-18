@@ -14,3 +14,8 @@ firebase.initializeApp(config)
 export const db = firebase.database()
 export const portfolioRef = db.ref().child('portfolio')
 export const transactionsRef = db.ref().child('transactions')
+
+export const auth = firebase.auth()
+export const provider = new firebase.auth.GoogleAuthProvider()
+
+export default firebase

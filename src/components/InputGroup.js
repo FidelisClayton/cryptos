@@ -6,20 +6,31 @@ const InputGroup = ({
   inputType,
   onChange,
   inputProps,
-  children
+  children,
+  inputSize
 }) => {
+  const inputClasses = [
+    'c-input-group__input',
+    inputSize === 'small' && 'c-input-group__input--small'
+  ]
+    .filter(className => className !== null)
+    .join(' ')
+
   return (
     <div className="c-input-group">
-      <label className="c-input-group__label">
-        { label }
-      </label>
+      { label && (
+          <label className="c-input-group__label">
+            { label }
+          </label>
+        )
+      }
 
       { children
           ? children
           : (
             <input
               type={inputType}
-              className="c-input-group__input"
+              className={inputClasses}
               onChange={onChange}
               {...inputProps}
             />
@@ -30,11 +41,12 @@ const InputGroup = ({
 }
 
 InputGroup.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   inputType: PropTypes.string,
   onChange: PropTypes.func,
   children: PropTypes.element,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
+  inputSize: PropTypes.string
 }
 
 export default InputGroup

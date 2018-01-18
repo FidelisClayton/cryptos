@@ -10,10 +10,18 @@ import Home from './components/Home'
 import NewOrder from './components/NewOrder'
 
 class App extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      user: null
+    }
+  }
+
   render() {
     return (
       <div>
-        <Header />
+        <Header user={this.state.user} />
         <Switch>
           <Route path="/new-order" component={NewOrder} />
           <Route path="/" component={Home} />
@@ -22,4 +30,5 @@ class App extends Component {
     )
   }
 }
+
 export default App

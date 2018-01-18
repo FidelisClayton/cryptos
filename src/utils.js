@@ -2,10 +2,12 @@ import _ from 'lodash'
 
 export const removeEmptyFields = object => {
   return Object.keys(object).reduce((previous, current) => {
-    if (!_.isEmpty(object[current])) {
+    const value = object[current]
+
+    if (!_.isNull(value) && !_.isUndefined(value)) {
       return {
         ...previous,
-        [current]: object[current]
+        [current]: value
       }
     } else {
       return previous

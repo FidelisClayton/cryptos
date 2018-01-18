@@ -7,13 +7,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    './src/index.js'
-  ],
+  entry: {
+    application: './src/index.js',
+    authentication: './src/auth.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/build/'
   },
   module: {
@@ -60,5 +60,11 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: path.join(__dirname, 'src', 'assets'), to: 'assets' }
     ])
-  ]
+  ],
+  devServer: {
+    contentBase: path.join(__dirname),
+    compress: true,
+    port: 3000,
+    hot: true
+  }
 }
