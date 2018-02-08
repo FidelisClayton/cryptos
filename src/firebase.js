@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import _ from 'lodash'
+import moment from 'moment'
 
 const config = {
   apiKey: 'AIzaSyCpFAtOGTMaILlWkRCYachGte-fKjM00U8',
@@ -21,15 +22,29 @@ export const storage = firebase.storage()
 export const coinsRef = storage.ref('coins')
 
 export const portfolioRef = () => {
-  const ref = `users/${getUserUid()}/portfolio`
+  const ref = `portfolios/${getUserUid()}`
 
   return db.ref().child(ref)
 }
 
 export const transactionsRef = () => {
-  const ref = `users/${getUserUid()}/transactions`
+  const ref = `transactions/${getUserUid()}`
 
   return db.ref().child(ref)
+}
+
+export const performanceRef = () => {
+  const ref = `performance-chart/${getUserUid()}/overall`
+  const yearAgo = moment().subtract(1, 'years').format('YYYY-MM-DD')
+
+  return db.ref(ref).orderByKey().startAt(yearAgo)
+}
+
+export const accountSummary = () => {
+  const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')
+  const ref = `performance-chart/${getUserUid()}/overall/${yesterday}`
+
+  return db.ref(ref)
 }
 
 export const auth = firebase.auth()

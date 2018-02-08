@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import {
   LineChart,
@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 
 import CustomTooltip from './CustomTooltip'
+import { performanceRef } from '../firebase'
 
 const data = [
   { date: '01/01/2018', profit: 20, rentability: 1 },
@@ -35,26 +36,44 @@ const styles ={
   }
 }
 
-const History = () => {
-  return (
-    <LineChart
-      width={900}
-      height={300}
-      data={data}
-      margin={styles.line}
-    >
-      <Tooltip content={<CustomTooltip />}/>
-      <Line
-        type="monotone"
-        dataKey="rentability"
-        stroke="#8884d8"
-        activeDot={{r: 8}}
-      />
-      <YAxis dataKey="rentability"/>
-      <ReferenceLine y={0} stroke="#8884d8" />
-      <CartesianGrid strokeDasharray="3 3"/>
-    </LineChart>
-  )
+class History extends Component {
+  state = {
+    history: []
+  }
+
+  componentDidMount () {
+    performanceRef().once('value')
+      .then(snapshot => snapshot.val())
+      .then(performance => Object.values(performance))
+      .then(performance => {
+        this.setState({
+          history: performance
+        })
+      })
+  }
+
+  render () {
+    return (
+      <LineChart
+        width={900}
+        height={300}
+        data={this.state.history}
+        margin={styles.line}
+      >
+        <Tooltip content={<CustomTooltip />}/>
+        <Line
+          type="monotone"
+          dataKey="amount"
+          stroke="#8884d8"
+          activeDot={{r: 8}}
+          dot={false}
+        />
+        <YAxis dataKey="amount"/>
+        <ReferenceLine y={0} stroke="#8884d8" />
+        <CartesianGrid strokeDasharray="3 3"/>
+      </LineChart>
+    )
+  }
 }
 
 export default History

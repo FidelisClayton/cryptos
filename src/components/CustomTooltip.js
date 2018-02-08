@@ -8,8 +8,7 @@ const CustomTooltip = (props) => {
     return (
       <div className="custom-tooltip">
         <p className="custom-tooltip__date">{ payload.date }</p>
-        <p className="custom-tooltip__rentability">Your rentability: { payload.rentability }%</p>
-        <p className="custom-tooltip__profit">Your profit: USD { payload.profit }</p>
+        <p className="custom-tooltip__rentability">Your net worth: US$ { payload.amount }</p>
       </div>
     )
   }
