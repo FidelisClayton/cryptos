@@ -10,7 +10,7 @@ class AccountSummary extends Component {
   componentDidMount () {
     accountSummary().once('value')
       .then(snapshot => snapshot.val())
-      .then(summary => this.setState({ summary }))
+      .then(summary => this.setState({ summary: Object.values(summary)[0] }))
   }
 
   render () {

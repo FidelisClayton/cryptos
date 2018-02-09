@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import {
   PieChart,
@@ -9,13 +10,15 @@ import {
 } from 'recharts'
 
 import CoinCard from './CoinCard'
+import {
+  getPortfolio,
+  buildPortfolio
+} from '../actions/portfolio'
 
 import {
   portfolioRef,
   getUserUid
 } from '../firebase'
-
-import { buildPortfolio, } from '../api'
 
 const data = [
   { name: 'Bitcoin', value: 2400 },
@@ -28,7 +31,7 @@ const data = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-export default class Portfolio extends Component {
+class Portfolio extends Component {
   constructor () {
     super()
 
@@ -38,13 +41,8 @@ export default class Portfolio extends Component {
   }
 
   componentDidMount () {
-    portfolioRef().on('value', snapshot => {
-      this.setState({
-        portfolio: snapshot.val() || {}
-      })
-    })
-
-    buildPortfolio(getUserUid())
+    this.props.getPortfolio()
+    this.props.buildPortfolio()
   }
 
   render () {
@@ -101,3 +99,17 @@ export default class Portfolio extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  ...state.portfolio
+})
+
+const mapDispatchToProps = {
+  getPortfolio,
+  buildPortfolio
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Portfolio)

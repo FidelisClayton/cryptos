@@ -13,11 +13,14 @@ const config = {
 
 firebase.initializeApp(config)
 
-export const getUserUid = () =>
-  _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
+export const STORAGE_KEY = 'CRYPTUS'
 
 export const db = firebase.database()
 export const storage = firebase.storage()
+export const auth = firebase.auth()
+
+export const getUserUid = () =>
+  _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
 
 export const coinsRef = storage.ref('coins')
 
@@ -41,15 +44,10 @@ export const performanceRef = () => {
 }
 
 export const accountSummary = () => {
-  const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD')
-  const ref = `performance-chart/${getUserUid()}/overall/${yesterday}`
+  const ref = `performance-chart/${getUserUid()}/overall`
 
-  return db.ref(ref)
+  return db.ref(ref).orderByKey().limitToLast(1)
 }
-
-export const auth = firebase.auth()
-
-export const STORAGE_KEY = 'CRYPTUS'
 
 export const isAuthenticated = () => {
   return !!auth.currentUser || !!window.localStorage.getItem(STORAGE_KEY)
