@@ -32,6 +32,14 @@ export default class Login extends Component {
       [inputName]: event.target.value
     })
 
+  handleAuthProviderLoginError = (error) => {
+    this.setState({
+      error: error.message
+    })
+
+    return error
+  }
+
   handleGoogleLogin = () => {
     auth.signInWithPopup(googleAuth)
       .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
@@ -40,7 +48,7 @@ export default class Login extends Component {
           redirectToHome: true
         })
       })
-      .catch(console.log)
+      .catch(this.handleAuthProviderLoginError)
   }
 
   handleFacebookLogin = () => {
@@ -51,7 +59,7 @@ export default class Login extends Component {
           redirectToHome: true
         })
       })
-      .catch(console.log)
+      .catch(this.handleAuthProviderLoginError)
   }
 
   handleTwitterLogin = () => {
@@ -62,7 +70,7 @@ export default class Login extends Component {
           redirectToHome: true
         })
       })
-      .catch(console.log)
+      .catch(this.handleAuthProviderLoginError)
   }
 
   handleGithubLogin = () => {
@@ -73,7 +81,7 @@ export default class Login extends Component {
           redirectToHome: true
         })
       })
-      .catch(console.log)
+      .catch(this.handleAuthProviderLoginError)
   }
 
   handleFormSubmit = event => {
