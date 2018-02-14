@@ -6,6 +6,7 @@ import firebase, {
   isAuthenticated,
   googleAuth,
   facebookAuth,
+  twitterAuth,
   userRef
 } from '../firebase'
 
@@ -44,6 +45,20 @@ export default class Login extends Component {
   handleFacebookLogin = () => {
     auth.signInWithPopup(facebookAuth)
       .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(console.log)
+  }
+
+  handleTwitterLogin = () => {
+    auth.signInWithPopup(twitterAuth)
+      .then(res => {
+        console.log(res)
+        return userRef(res.user.uid).set(res.additionalUserInfo.profile)
+      })
       .then(() => {
         this.setState({
           redirectToHome: true
@@ -148,6 +163,16 @@ export default class Login extends Component {
                 onClick={this.handleFacebookLogin}
               >
                 Login with Facebook
+              </button>
+            </div>
+
+            <div className="auth__submit">
+              <button
+                type="button"
+                className="button__primary button--small"
+                onClick={this.handleTwitterLogin}
+              >
+                Login with Twitter
               </button>
             </div>
 
