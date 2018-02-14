@@ -18,6 +18,7 @@ export const STORAGE_KEY = 'CRYPTUS'
 export const db = firebase.database()
 export const storage = firebase.storage()
 export const auth = firebase.auth()
+export const googleAuth = new firebase.auth.GoogleAuthProvider()
 
 export const getUserUid = () =>
   _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))
@@ -41,6 +42,12 @@ export const performanceRef = () => {
   const yearAgo = moment().subtract(1, 'years').format('YYYY-MM-DD')
 
   return db.ref(ref).orderByKey().startAt(yearAgo)
+}
+
+export const userRef = uid => {
+  const ref = `users/${uid || getUserUid()}`
+
+  return db.ref(ref)
 }
 
 export const accountSummary = () => {

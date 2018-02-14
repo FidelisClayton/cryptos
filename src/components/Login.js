@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import {
+import firebase, {
   auth,
-  isAuthenticated
+  isAuthenticated,
+  googleAuth,
+  userRef
 } from '../firebase'
 
 import InputGroup from './InputGroup'
@@ -26,6 +28,17 @@ export default class Login extends Component {
     event => this.setState({
       [inputName]: event.target.value
     })
+
+  handleGoogleLogin = () => {
+    auth.signInWithPopup(googleAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(console.log)
+  }
 
   handleFormSubmit = event => {
     const {
@@ -103,6 +116,16 @@ export default class Login extends Component {
                 className="button__primary button--small"
               >
                 Login
+              </button>
+            </div>
+
+            <div className="auth__submit">
+              <button
+                type="button"
+                className="button__primary button--small"
+                onClick={this.handleGoogleLogin}
+              >
+                Login with Google
               </button>
             </div>
 
