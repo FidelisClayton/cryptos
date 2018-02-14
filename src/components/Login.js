@@ -5,6 +5,7 @@ import firebase, {
   auth,
   isAuthenticated,
   googleAuth,
+  facebookAuth,
   userRef
 } from '../firebase'
 
@@ -31,6 +32,17 @@ export default class Login extends Component {
 
   handleGoogleLogin = () => {
     auth.signInWithPopup(googleAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(console.log)
+  }
+
+  handleFacebookLogin = () => {
+    auth.signInWithPopup(facebookAuth)
       .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
       .then(() => {
         this.setState({
@@ -126,6 +138,16 @@ export default class Login extends Component {
                 onClick={this.handleGoogleLogin}
               >
                 Login with Google
+              </button>
+            </div>
+
+            <div className="auth__submit">
+              <button
+                type="button"
+                className="button__primary button--small"
+                onClick={this.handleFacebookLogin}
+              >
+                Login with Facebook
               </button>
             </div>
 
