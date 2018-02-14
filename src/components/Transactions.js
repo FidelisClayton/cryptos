@@ -19,7 +19,8 @@ export default class Transactions extends Component {
 
   componentDidMount () {
     transactionsRef().on('value', snapshot => {
-      this.setState({ transactions: snapshot.val() })
+      if (snapshot.val())
+        this.setState({ transactions: snapshot.val() })
     })
   }
 
@@ -64,6 +65,17 @@ export default class Transactions extends Component {
           }
         </td>
         <td className="table__data u-text-center">
+          { transaction.amount }
+        </td>
+        <td className="table__data u-text-center">
+          <FormattedNumber
+            value={transaction.amount * transaction.priceUSD}
+            style="currency"
+            minimumFractionDigits={2}
+            currency="USD"
+          />
+        </td>
+        <td className="table__data u-text-center">
           { moment(transaction.purchaseDate).format('hh:mm on DD/MM/YYYY') }
         </td>
       </tr>
@@ -90,6 +102,12 @@ export default class Transactions extends Component {
               </th>
               <th className="table__head u-text-center">
                 Price <br /> <small className="table__small">(ETH)</small>
+              </th>
+              <th className="table__head u-text-center">
+                Amount
+              </th>
+              <th className="table__head u-text-center">
+                Total
               </th>
               <th className="table__head u-text-center">
                 Date

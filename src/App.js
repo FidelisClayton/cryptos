@@ -12,8 +12,8 @@ import {
 
 import Authentication from './Authentication'
 import Home from './components/Home'
-import NewOrder from './components/NewOrder'
 import MatchWhenAuthorized from './components/MatchWhenAuthorized'
+import Footer from './components/Footer'
 
 class App extends Component {
   constructor () {
@@ -43,6 +43,7 @@ class App extends Component {
           <MatchWhenAuthorized path="/home" component={Home} />
           <Route path="/" component={Authentication} />
         </Switch>
+        <Footer />
       </div>
     )
   }

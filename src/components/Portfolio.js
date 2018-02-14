@@ -46,7 +46,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio } = this.state
+    const portfolio = this.props.data
 
     return (
       <div className="portfolio">
@@ -86,7 +86,7 @@ class Portfolio extends Component {
         </div>
 
         <div className="portfolio__coin-cards">
-          { Object.entries(portfolio).map(([ key, data ]) => (
+          { portfolio.map(([ key, data ]) => (
               <CoinCard
                 key={key}
                 coinId={key}

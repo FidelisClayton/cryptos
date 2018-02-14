@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
-import { auth } from '../firebase'
+import {
+  auth,
+  addUser
+} from '../firebase'
 
 import InputGroup from './InputGroup'
 

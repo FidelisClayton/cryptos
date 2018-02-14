@@ -3,7 +3,7 @@ import {
   getUserUid
 } from '../firebase'
 
-import api from '../api'
+import * as api from '../api'
 
 export const PORTFOLIO_REQUEST = 'PORTFOLIO/REQUEST'
 export const PORTFOLIO_FAIL = 'PORTFOLIO/FAIL'

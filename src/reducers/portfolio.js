@@ -23,8 +23,8 @@ export const portfolio = (state = initialData, action) => {
     case PORTFOLIO_SUCCESS:
       return {
         ...state,
-        // loading: false,
-        data: action.data
+        loading: false,
+        data: Object.entries(action.data)
       }
 
       break;

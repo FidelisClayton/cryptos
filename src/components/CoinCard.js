@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { FormattedNumber } from 'react-intl'
 
-import {
-  storage,
-  coinsRef,
-} from '../firebase'
+import { coinsRef, } from '../firebase'
 import { askImage } from '../api'
 
 const onImageError = coinId => {
@@ -26,7 +24,7 @@ export default class CoinCard extends Component {
       .then(url => {
         this.setState({ image: url })
       })
-      .catch(error => {
+      .catch(() => {
         onImageError(this.props.coinId)
 
         this.setState({ image: 'dist/assets/images/default.svg' })
@@ -125,7 +123,12 @@ export default class CoinCard extends Component {
           </label>
 
           <span className="coin-card__amount">
-            US$ { amount }
+            <FormattedNumber
+              value={amount}
+              style="currency"
+              minimumFractionDigits={2}
+              currency="USD"
+            />
           </span>
         </div>
       </div>

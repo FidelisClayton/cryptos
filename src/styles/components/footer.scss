@@ -1,0 +1,13 @@
+.footer {
+  height: $footer-height;
+  padding: $footer-padding;
+  margin-top: $footer-margin-top;
+  border-top: 1px solid #efefef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__icon {
+    width: px-to-rem(30px);
+  }
+}
