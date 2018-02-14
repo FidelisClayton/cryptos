@@ -19,4 +19,14 @@
   &__logo-wrapper {
     font-size: px-to-rem(20px);
   }
+
+  &__logo {
+    color: $white;
+    line-height: px-to-rem(44px);
+    font-weight: bold;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
 }

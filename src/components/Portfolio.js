@@ -6,7 +6,8 @@ import {
   PieChart,
   Pie,
   Tooltip,
-  Cell
+  Cell,
+  ResponsiveContainer
 } from 'recharts'
 
 import CoinCard from './CoinCard'
@@ -51,26 +52,25 @@ class Portfolio extends Component {
     return (
       <div className="portfolio">
         <div className="portfolio__chart-wrapper">
-          <PieChart
-            width={600}
-            height={400}
-          >
-            <Pie
-              data={data}
-              dataKey="value"
-              outerRadius={150}
-              fill="#82ca9d"
-            >
-              { data.map((entry, index) => (
-                  <Cell
-                    fill={COLORS[index % COLORS.length]}
-                    key={`${entry.value}-${index}`}
-                  />
-                ))
-              }
-            </Pie>
-            <Tooltip/>
-          </PieChart>
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={data}
+                dataKey="value"
+                outerRadius={150}
+                fill="#82ca9d"
+              >
+                { data.map((entry, index) => (
+                    <Cell
+                      fill={COLORS[index % COLORS.length]}
+                      key={`${entry.value}-${index}`}
+                    />
+                  ))
+                }
+              </Pie>
+              <Tooltip/>
+            </PieChart>
+          </ResponsiveContainer>
         </div>
 
         <div className="portfolio__section-header">

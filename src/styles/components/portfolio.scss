@@ -1,6 +1,5 @@
 .portfolio {
   @include grid-column(12);
-  @include grid-collapse;
 
   &__chart-wrapper {
     @include grid-collapse;
@@ -9,6 +8,8 @@
     justify-content: center;
     align-items: center;
     background-color: $grey-1;
+    height: 400px;
+    width: 100%;
   }
 
   &__title {
@@ -44,6 +45,7 @@
 
   &__coin-cards,
   &__section-header {
+    @include grid-container;
     max-width: px-to-rem(1000px);
     margin: 0 auto;
     clear: both;

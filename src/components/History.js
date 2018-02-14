@@ -6,7 +6,8 @@ import {
   Tooltip,
   YAxis,
   ReferenceLine,
-  CartesianGrid
+  CartesianGrid,
+  ResponsiveContainer
 } from 'recharts';
 
 import CustomTooltip from './CustomTooltip'
@@ -39,24 +40,28 @@ class History extends Component {
 
   render () {
     return (
-      <LineChart
-        width={900}
-        height={300}
-        data={this.state.history}
-        margin={styles.line}
-      >
-        <Tooltip content={<CustomTooltip />}/>
-        <Line
-          type="monotone"
-          dataKey="overallRentability"
-          stroke="#8884d8"
-          activeDot={{r: 8}}
-          dot={false}
-        />
-        <YAxis unit="%" dataKey="overallRentability"/>
-        <ReferenceLine y={0} stroke="#8884d8" />
-        <CartesianGrid strokeDasharray="3 3"/>
-      </LineChart>
+      <div className="history">
+        <ResponsiveContainer>
+          <LineChart
+            width={900}
+            height={300}
+            data={this.state.history}
+            margin={styles.line}
+          >
+            <Tooltip content={<CustomTooltip />}/>
+            <Line
+              type="monotone"
+              dataKey="overallRentability"
+              stroke="#8884d8"
+              activeDot={{r: 8}}
+              dot={false}
+            />
+            <YAxis unit="%" dataKey="overallRentability"/>
+            <ReferenceLine y={0} stroke="#8884d8" />
+            <CartesianGrid strokeDasharray="3 3"/>
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     )
   }
 }

@@ -10,8 +10,8 @@ const Header = props => {
       <div className="header__navigation">
         <div className="header__left">
           <div className="header__logo-wrapper">
-            <Link to="/home">
-              <h2 className="header__logo">Crypto</h2>
+            <Link to="/home" className="header__link">
+              <h2 className="header__logo">Cryptus</h2>
             </Link>
           </div>
         </div>

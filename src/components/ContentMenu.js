@@ -21,12 +21,6 @@ const ContentMenu = () => {
         />
 
         <MenuItem
-          label="Market"
-          active={currentRoute === '/home/market'}
-          route="/home/order"
-        />
-
-        <MenuItem
           label="Transactions"
           active={currentRoute === '/home/transactions'}
           route="/home/transactions"

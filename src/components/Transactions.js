@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-import {
-  FormattedNumber,
-  FormattedDate
-} from 'react-intl'
+import { FormattedNumber } from 'react-intl'
 
 import { transactionsRef } from '../firebase'
 
@@ -76,7 +73,7 @@ export default class Transactions extends Component {
           />
         </td>
         <td className="table__data u-text-center">
-          { moment(transaction.purchaseDate).format('hh:mm on DD/MM/YYYY') }
+          { moment(transaction.purchaseDate).format('DD/MM/YYYY') }
         </td>
       </tr>
     ))
@@ -84,7 +81,7 @@ export default class Transactions extends Component {
 
   render () {
     return (
-      <div className="transactions">
+      <div className="transactions table__responsive-wrapper">
         <table className="table">
           <thead>
             <tr>

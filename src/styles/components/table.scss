@@ -18,9 +18,17 @@
     &:hover {
       background-color: $grey-2;
     }
+
+    &:last-of-type > .table__data {
+      padding-bottom: px-to-rem(15px);
+    }
   }
 
   &__small {
     font-size: px-to-rem(12px);
+  }
+
+  &__responsive-wrapper {
+    overflow: auto;
   }
 }
