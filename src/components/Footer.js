@@ -15,7 +15,7 @@ const Footer = () => {
         >
           <img
             className="footer__icon"
-            src="dist/assets/images/github.svg"
+            src="assets/images/github.svg"
           />
         </a>
       </div>
