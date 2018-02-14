@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 import {
   auth,
-  addUser
+  addUser,
+  googleAuth,
+  facebookAuth,
+  twitterAuth,
+  githubAuth,
+  userRef
 } from '../firebase'
 
 import InputGroup from './InputGroup'
+import Button from './Button'
 
 export default class Register extends Component {
   constructor () {
@@ -14,7 +21,8 @@ export default class Register extends Component {
     this.state = {
       email: null,
       password: null,
-      error: null
+      error: null,
+      redirectToHome: false
     }
   }
 
@@ -22,6 +30,50 @@ export default class Register extends Component {
     event => this.setState({
       [inputName]: event.target.value
     })
+
+  handleGoogleLogin = () => {
+    auth.signInWithPopup(googleAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(this.handleAuthProviderLoginError)
+  }
+
+  handleFacebookLogin = () => {
+    auth.signInWithPopup(facebookAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(this.handleAuthProviderLoginError)
+  }
+
+  handleTwitterLogin = () => {
+    auth.signInWithPopup(twitterAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(this.handleAuthProviderLoginError)
+  }
+
+  handleGithubLogin = () => {
+    auth.signInWithPopup(githubAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
+      })
+      .catch(this.handleAuthProviderLoginError)
+  }
 
   handleFormSubmit = event => {
     const {
@@ -36,7 +88,8 @@ export default class Register extends Component {
         this.setState({
           email: null,
           password: null,
-          error: null
+          error: null,
+          redirectToHome: true
         })
       })
       .catch(error => {
@@ -47,8 +100,15 @@ export default class Register extends Component {
   }
 
   render () {
+    const { from } = this.props.location.state || '/'
+
     return (
       <div className="login">
+        { this.state.redirectToHome && (
+            <Redirect to={from || '/home'} />
+          )
+        }
+
         <div className="auth__wrapper">
           <h2 className="heading u-text-center">Welcome back to Cryptus!</h2>
           <h3 className="heading-description u-text-center">Register to have access to the best Crypto portfolio tracker</h3>
@@ -83,6 +143,28 @@ export default class Register extends Component {
               >
                 Register
               </button>
+            </div>
+
+            <div className="auth__providers">
+              <Button
+                image="dist/assets/images/github.svg"
+                onClick={this.handleGithubLogin}
+              />
+
+              <Button
+                onClick={this.handleGoogleLogin}
+                image="dist/assets/images/google.svg"
+              />
+
+              <Button
+                onClick={this.handleFacebookLogin}
+                image="dist/assets/images/facebook.svg"
+              />
+
+              <Button
+                onClick={this.handleTwitterLogin}
+                image="dist/assets/images/twitter.svg"
+              />
             </div>
 
             { this.state.error && (

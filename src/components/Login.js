@@ -12,6 +12,7 @@ import firebase, {
 } from '../firebase'
 
 import InputGroup from './InputGroup'
+import Button from './Button'
 
 const USER_NOT_FOUND = 'auth/user-not-found'
 
@@ -163,44 +164,26 @@ export default class Login extends Component {
               </button>
             </div>
 
-            <div className="auth__submit">
-              <button
-                type="button"
-                className="button__primary button--small"
-                onClick={this.handleGoogleLogin}
-              >
-                Login with Google
-              </button>
-            </div>
-
-            <div className="auth__submit">
-              <button
-                type="button"
-                className="button__primary button--small"
-                onClick={this.handleFacebookLogin}
-              >
-                Login with Facebook
-              </button>
-            </div>
-
-            <div className="auth__submit">
-              <button
-                type="button"
-                className="button__primary button--small"
-                onClick={this.handleTwitterLogin}
-              >
-                Login with Twitter
-              </button>
-            </div>
-
-            <div className="auth__submit">
-              <button
-                type="button"
-                className="button__primary button--small"
+            <div className="auth__providers">
+              <Button
+                image="dist/assets/images/github.svg"
                 onClick={this.handleGithubLogin}
-              >
-                Login with Github
-              </button>
+              />
+
+              <Button
+                onClick={this.handleGoogleLogin}
+                image="dist/assets/images/google.svg"
+              />
+
+              <Button
+                onClick={this.handleFacebookLogin}
+                image="dist/assets/images/facebook.svg"
+              />
+
+              <Button
+                onClick={this.handleTwitterLogin}
+                image="dist/assets/images/twitter.svg"
+              />
             </div>
 
             { this.state.error && (

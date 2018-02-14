@@ -34,4 +34,19 @@
     text-align: center;
     color: $negative-red;
   }
+
+  &__providers {
+    display: flex;
+    justify-content: space-around;
+    margin-top: px-to-rem(20px);
+
+    .button__icon {
+      border: 0;
+      width: px-to-rem(40px);
+      height: px-to-rem(40px);
+      outline: none;
+      cursor: pointer;
+      background-color: transparent;
+    }
+  }
 }
