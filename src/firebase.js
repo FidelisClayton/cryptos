@@ -21,6 +21,7 @@ export const auth = firebase.auth()
 export const googleAuth = new firebase.auth.GoogleAuthProvider()
 export const facebookAuth = new firebase.auth.FacebookAuthProvider()
 export const twitterAuth = new firebase.auth.TwitterAuthProvider()
+export const githubAuth = new firebase.auth.GithubAuthProvider()
 
 export const getUserUid = () =>
   _.get(auth, 'currentUser.uid', window.localStorage.getItem(STORAGE_KEY))

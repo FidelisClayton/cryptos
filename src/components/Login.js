@@ -7,6 +7,7 @@ import firebase, {
   googleAuth,
   facebookAuth,
   twitterAuth,
+  githubAuth,
   userRef
 } from '../firebase'
 
@@ -55,10 +56,18 @@ export default class Login extends Component {
 
   handleTwitterLogin = () => {
     auth.signInWithPopup(twitterAuth)
-      .then(res => {
-        console.log(res)
-        return userRef(res.user.uid).set(res.additionalUserInfo.profile)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
+      .then(() => {
+        this.setState({
+          redirectToHome: true
+        })
       })
+      .catch(console.log)
+  }
+
+  handleGithubLogin = () => {
+    auth.signInWithPopup(githubAuth)
+      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
       .then(() => {
         this.setState({
           redirectToHome: true
@@ -173,6 +182,16 @@ export default class Login extends Component {
                 onClick={this.handleTwitterLogin}
               >
                 Login with Twitter
+              </button>
+            </div>
+
+            <div className="auth__submit">
+              <button
+                type="button"
+                className="button__primary button--small"
+                onClick={this.handleGithubLogin}
+              >
+                Login with Github
               </button>
             </div>
 
