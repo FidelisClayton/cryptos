@@ -13,6 +13,7 @@ import {
 
 import InputGroup from './InputGroup'
 import Button from './Button'
+import AuthProviders from './AuthProviders'
 
 export default class Register extends Component {
   constructor () {
@@ -31,48 +32,18 @@ export default class Register extends Component {
       [inputName]: event.target.value
     })
 
-  handleGoogleLogin = () => {
-    auth.signInWithPopup(googleAuth)
-      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
-      .then(() => {
-        this.setState({
-          redirectToHome: true
-        })
-      })
-      .catch(this.handleAuthProviderLoginError)
+  handleAuthProviderLoginError = (error) => {
+    this.setState({
+      error: error.message
+    })
+
+    return error
   }
 
-  handleFacebookLogin = () => {
-    auth.signInWithPopup(facebookAuth)
-      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
-      .then(() => {
-        this.setState({
-          redirectToHome: true
-        })
-      })
-      .catch(this.handleAuthProviderLoginError)
-  }
-
-  handleTwitterLogin = () => {
-    auth.signInWithPopup(twitterAuth)
-      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
-      .then(() => {
-        this.setState({
-          redirectToHome: true
-        })
-      })
-      .catch(this.handleAuthProviderLoginError)
-  }
-
-  handleGithubLogin = () => {
-    auth.signInWithPopup(githubAuth)
-      .then(res => userRef(res.user.uid).set(res.additionalUserInfo.profile))
-      .then(() => {
-        this.setState({
-          redirectToHome: true
-        })
-      })
-      .catch(this.handleAuthProviderLoginError)
+  handleAuthSuccess = () => {
+    this.setState({
+      redirectToHome: true
+    })
   }
 
   handleFormSubmit = event => {
@@ -145,27 +116,10 @@ export default class Register extends Component {
               </button>
             </div>
 
-            <div className="auth__providers">
-              <Button
-                image="dist/assets/images/github.svg"
-                onClick={this.handleGithubLogin}
-              />
-
-              <Button
-                onClick={this.handleGoogleLogin}
-                image="dist/assets/images/google.svg"
-              />
-
-              <Button
-                onClick={this.handleFacebookLogin}
-                image="dist/assets/images/facebook.svg"
-              />
-
-              <Button
-                onClick={this.handleTwitterLogin}
-                image="dist/assets/images/twitter.svg"
-              />
-            </div>
+            <AuthProviders
+              handleAuthSuccess={this.handleAuthSuccess}
+              handleAuthProviderLoginError={this.handleAuthProviderLoginError}
+            />
 
             { this.state.error && (
                 <div className="auth__error">

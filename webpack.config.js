@@ -13,8 +13,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
-    publicPath: '/build/'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -58,13 +57,13 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: path.join(__dirname, 'src', 'assets'), to: 'assets' }
+      { from: path.join(__dirname, 'src', 'assets'), to: 'assets' },
+      { from: path.join(__dirname, 'src', 'index.html'), to: 'index.html'}
     ])
   ],
   devServer: {
-    contentBase: path.join(__dirname),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    hot: true
   }
 }
