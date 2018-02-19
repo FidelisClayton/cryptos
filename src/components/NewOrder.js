@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Autosuggest from 'react-autosuggest'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import { Form, Text } from 'react-form'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -44,7 +45,8 @@ export default class NewOrder extends Component {
         type: ORDER_TYPE_BUY
       },
       suggestions: [],
-      coins: []
+      coins: [],
+      success: false
     }
   }
 
@@ -124,27 +126,28 @@ export default class NewOrder extends Component {
     })
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
+  handleSubmit = (values, event, form) => {
+    const isValid = Object.keys(form.errors).length === 0
 
-    const { form } = this.state
-
-    transactionsRef().push(removeEmptyFields({
-      coin: form.crypto,
-      priceUSD: form.priceUSD,
-      priceBTC: form.priceBTC,
-      priceETH: form.priceETH,
-      purchaseDate: form.date.toISOString(),
-      amount: form.amount,
-      type: form.type,
-    }), error => {
-      if (!error) {
-        buildPortfolio(getUserUid())
-      } else {
-        console.log(error)
-      }
-    })
+    if (isValid) {
+      return transactionsRef().push(removeEmptyFields({
+        coin: form.crypto,
+        purchaseDate: this.state.form.date.toISOString(),
+        type: this.state.form.type,
+        ...values
+      }))
+      .then(form.resetAll)
+      .then(buildPortfolio(getUserUid()))
+      .then(() => {
+        this.setState({ success: true })
+      })
+      .catch(console.log)
+    } else {
+      console.log(form.errors)
+    }
   }
+
+  handleSubmitFailure = console.log
 
   render () {
     const {
@@ -164,97 +167,128 @@ export default class NewOrder extends Component {
         <h2 className="heading u-text-center">Add a new coin transaction</h2>
         <h3 className="heading-description u-text-center">Fill the form to add a new coin transaction</h3>
 
-        <form
-          className="new-order__form"
+        <Form
           onSubmit={this.handleSubmit}
+          onSubmitFailure={this.handleSubmitFailure}
         >
-          <InputGroup
-            label="Buy or sell?"
-          >
-            <div className="c-radio-group">
-              <RadioGroupButton
-                selected={this.state.form.type === ORDER_TYPE_BUY}
-                onClick={() => this.handleRadioClick(ORDER_TYPE_BUY)}
-              >
-                Buy
-              </RadioGroupButton>
-              <RadioGroupButton
-                selected={this.state.form.type === ORDER_TYPE_SELL}
-                onClick={() => this.handleRadioClick(ORDER_TYPE_SELL)}
-              >
-                Sell
-              </RadioGroupButton>
-            </div>
-          </InputGroup>
-
-          <InputGroup
-            label="Coin"
-          >
-            <Autosuggest
-              className="c-input-group__input"
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              onSuggestionSelected={this.onSuggestionSelected}
-              getSuggestionValue={getSuggestionValue}
-              renderSuggestion={renderSuggestion}
-              inputProps={inputProps}
-            />
-          </InputGroup>
-
-          <InputGroup
-            label="Amount of coins"
-            inputType="number"
-            onChange={this.onInputChange('amount')}
-            inputProps={{
-              step: "any",
-              required: "true"
-            }}
-          />
-
-          <InputGroup
-            label="Price per coin (USD)"
-            inputType="number"
-            onChange={this.onInputChange('priceUSD')}
-            inputProps={{
-              step: "any",
-              required: "true"
-            }}
-          />
-
-          <InputGroup
-            label="Price per coin (BTC)"
-            inputType="number"
-            onChange={this.onInputChange('priceBTC')}
-            inputProps={{ step: "any" }}
-          />
-
-          <InputGroup
-            label="Price per coin (ETH)"
-            inputType="number"
-            onChange={this.onInputChange('priceETH')}
-            inputProps={{ step: "any" }}
-          />
-
-          <InputGroup
-            label="Date"
-          >
-            <DatePicker
-              selected={this.state.form.date}
-              onChange={this.onDatePickerChange}
-              dateFormat='DD/MM/YYYY'
-            />
-          </InputGroup>
-
-          <div className="c-submit-wrapper">
-            <button
-              type="submit"
-              className="button__primary"
+          { formApi => (
+            <form
+              className="new-order__form"
+              onSubmit={formApi.submitForm}
             >
-              Submit
-            </button>
-          </div>
-        </form>
+              <InputGroup
+                label="Buy or sell?"
+              >
+                <div className="c-radio-group">
+                  <RadioGroupButton
+                    selected={this.state.form.type === ORDER_TYPE_BUY}
+                    onClick={() => this.handleRadioClick(ORDER_TYPE_BUY)}
+                  >
+                    Buy
+                  </RadioGroupButton>
+                  <RadioGroupButton
+                    selected={this.state.form.type === ORDER_TYPE_SELL}
+                    onClick={() => this.handleRadioClick(ORDER_TYPE_SELL)}
+                  >
+                    Sell
+                  </RadioGroupButton>
+                </div>
+              </InputGroup>
+
+              <InputGroup
+                label="Coin"
+              >
+                <Autosuggest
+                  className="c-input-group__input"
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                  onSuggestionSelected={this.onSuggestionSelected}
+                  getSuggestionValue={getSuggestionValue}
+                  renderSuggestion={renderSuggestion}
+                  inputProps={inputProps}
+                />
+              </InputGroup>
+
+              <InputGroup
+                label="Amount of coins"
+                inputType="number"
+                onChange={this.onInputChange('amount')}
+                inputProps={{
+                  step: "any",
+                  required: "true"
+                }}
+              >
+                <Text
+                  className="c-input-group__input"
+                  type="number"
+                  field="amount"
+                />
+              </InputGroup>
+
+              <InputGroup
+                label="Price per coin (USD)"
+                inputType="number"
+                onChange={this.onInputChange('priceUSD')}
+              >
+                <Text
+                  className="c-input-group__input"
+                  type="number"
+                  field="priceUSD"
+                />
+              </InputGroup>
+
+              <InputGroup
+                label="Price per coin (BTC)"
+                inputType="number"
+                onChange={this.onInputChange('priceBTC')}
+                inputProps={{ step: "any" }}
+              >
+                <Text
+                  className="c-input-group__input"
+                  type="number"
+                  field="priceBTC"
+                />
+              </InputGroup>
+
+              <InputGroup
+                label="Price per coin (ETH)"
+                inputType="number"
+                onChange={this.onInputChange('priceETH')}
+                inputProps={{ step: "any" }}
+              >
+                <Text
+                  className="c-input-group__input"
+                  type="number"
+                  field="priceETH"
+                />
+              </InputGroup>
+
+              <InputGroup
+                label="Date"
+              >
+                <DatePicker
+                  selected={this.state.form.date}
+                  onChange={this.onDatePickerChange}
+                  dateFormat='DD/MM/YYYY'
+                />
+              </InputGroup>
+
+              <div className="c-message--success">
+                Transaction successfully created
+              </div>
+
+              <div className="c-submit-wrapper">
+                <button
+                  type="submit"
+                  className="button__primary"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          )}
+        </Form>
       </div>
     )
   }
