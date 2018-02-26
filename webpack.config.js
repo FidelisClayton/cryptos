@@ -1,9 +1,11 @@
-const path = require('path');
-const neat = require('bourbon-neat').includePaths;
-const bourbon = require('node-bourbon').includePaths[1];
-const globImporter = require('node-sass-glob-importer');
+const webpack = require('webpack')
+const path = require('path')
+const neat = require('bourbon-neat').includePaths
+const bourbon = require('node-bourbon').includePaths[1]
+const globImporter = require('node-sass-glob-importer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+require('dotenv').config()
 
 module.exports = {
   devtool: 'eval',
@@ -59,7 +61,10 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: path.join(__dirname, 'src', 'assets'), to: 'assets' },
       { from: path.join(__dirname, 'src', 'index.html'), to: 'index.html'}
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL)
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

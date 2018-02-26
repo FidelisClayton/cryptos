@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const serverUrl = 'http://localhost:3001'
+const serverUrl = process.env.SERVER_URL
 
 export const getCoinData = () => axios.get(`${serverUrl}/coins`)
   .then(res => res.data)
