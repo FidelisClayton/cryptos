@@ -131,7 +131,7 @@ export default class NewOrder extends Component {
 
     if (isValid) {
       return transactionsRef().push(removeEmptyFields({
-        coin: form.crypto,
+        coin: this.state.form.crypto,
         purchaseDate: this.state.form.date.toISOString(),
         type: this.state.form.type,
         ...values
@@ -273,10 +273,6 @@ export default class NewOrder extends Component {
                   dateFormat='DD/MM/YYYY'
                 />
               </InputGroup>
-
-              <div className="c-message--success">
-                Transaction successfully created
-              </div>
 
               <div className="c-submit-wrapper">
                 <button
