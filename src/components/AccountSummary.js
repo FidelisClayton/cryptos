@@ -12,6 +12,7 @@ class AccountSummary extends Component {
   }
 
   componentDidMount () {
+    console.log("component did mount")
     accountSummary().once('value')
       .then(snapshot => snapshot.val() || {})
       .then(summary => {

@@ -16,7 +16,7 @@ const ContentMenu = () => {
 
         <MenuItem
           label="History"
-          active={currentRoute === '/home/history'}
+          active={currentRoute === '/home/history' || currentRoute === '/home'}
           route="/home/history"
         />
 

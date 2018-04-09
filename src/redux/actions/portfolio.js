@@ -1,9 +1,9 @@
 import {
   portfolioRef,
   getUserUid
-} from '../firebase'
+} from '../../firebase'
 
-import * as api from '../api'
+import * as api from '../../api'
 
 export const PORTFOLIO_REQUEST = 'PORTFOLIO/REQUEST'
 export const PORTFOLIO_FAIL = 'PORTFOLIO/FAIL'
@@ -36,8 +36,8 @@ export const buildPortfolio = () => dispatch => {
   dispatch(buildPortfolioLoading())
 
   api.buildPortfolio(getUserUid())
-    .then(buildPortfolioSuccess)
-    .catch(buildPortfolioError)
+    .then(() => dispatch(buildPortfolioSuccess))
+    .catch(() => dispatch(buildPortfolioError))
 }
 
 const buildPortfolioLoading = () => ({

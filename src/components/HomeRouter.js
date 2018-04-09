@@ -5,8 +5,8 @@ import {
   Switch
 } from 'react-router-dom'
 
-import NewOrder from './NewOrder'
-import Main from './Main'
+import NewOrder from '../containers/NewOrder'
+import Main from '../containers/Main'
 
 const HomeRouter = () => {
   return (

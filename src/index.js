@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom'
 
 import App from './App';
-import store from './store'
+import store from './redux/store'
 
 ReactDOM.render((
   <Provider store={store}>

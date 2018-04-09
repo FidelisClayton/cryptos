@@ -10,11 +10,12 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-import CoinCard from './CoinCard'
+import CoinCard from '../components/CoinCard'
+
 import {
   getPortfolio,
   buildPortfolio
-} from '../actions/portfolio'
+} from '../redux/actions/portfolio'
 
 import {
   portfolioRef,

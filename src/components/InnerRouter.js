@@ -3,9 +3,9 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 import ContentMenu from './ContentMenu'
-import History from './History'
-import Portfolio from './Portfolio'
-import Transactions from './Transactions'
+import History from '../containers/History'
+import Portfolio from '../containers/Portfolio'
+import Transactions from '../containers/Transactions'
 
 const InnerRouter = () => {
   return (

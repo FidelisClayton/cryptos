@@ -6,8 +6,8 @@ import { Form, Text } from 'react-form'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import InputGroup from './InputGroup'
-import RadioGroupButton from './RadioGroupButton'
+import InputGroup from '../components/InputGroup'
+import RadioGroupButton from '../components/RadioGroupButton'
 
 import { getCoinData } from '../api'
 import {
