@@ -1,24 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { FormattedNumber } from 'react-intl'
 
-import { transactionsRef } from '../firebase'
+import { fetchTransactions } from '@redux/actions/transactions'
 
-export default class Transactions extends Component {
-  constructor () {
-    super()
-
-    this.state = {
-      transactions: {}
-    }
-  }
-
-  componentDidMount () {
-    transactionsRef().on('value', snapshot => {
-      if (snapshot.val())
-        this.setState({ transactions: snapshot.val() })
-    })
+class Transactions extends Component {
+  componentDidMount() {
+    this.props.fetchTransactions()
   }
 
   renderTransactions (transactions) {
@@ -82,41 +72,59 @@ export default class Transactions extends Component {
   render () {
     return (
       <div className="transactions table__responsive-wrapper">
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="table__head">
-                Coin
-              </th>
-              <th className="table__head">
-                Type
-              </th>
-              <th className="table__head u-text-center">
-                Price <br /> <small className="table__small">(USD)</small>
-              </th>
-              <th className="table__head u-text-center">
-                Price <br /> <small className="table__small">(BTC)</small>
-              </th>
-              <th className="table__head u-text-center">
-                Price <br /> <small className="table__small">(ETH)</small>
-              </th>
-              <th className="table__head u-text-center">
-                Amount
-              </th>
-              <th className="table__head u-text-center">
-                Total
-              </th>
-              <th className="table__head u-text-center">
-                Date
-              </th>
-            </tr>
-          </thead>
+        { this.props.loading && !this.props.loaded && (
+          <div className="loading">Loading</div>
+        )}
 
-          <tbody>
-            { this.renderTransactions(this.state.transactions) }
-          </tbody>
-        </table>
+        { !this.props.loading && this.props.error && !this.props.loaded && (
+          <div className="error">Error</div>
+        )}
+
+        { this.props.loaded && (
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="table__head">
+                  Coin
+                </th>
+                <th className="table__head">
+                  Type
+                </th>
+                <th className="table__head u-text-center">
+                  Price <br /> <small className="table__small">(USD)</small>
+                </th>
+                <th className="table__head u-text-center">
+                  Price <br /> <small className="table__small">(BTC)</small>
+                </th>
+                <th className="table__head u-text-center">
+                  Price <br /> <small className="table__small">(ETH)</small>
+                </th>
+                <th className="table__head u-text-center">
+                  Amount
+                </th>
+                <th className="table__head u-text-center">
+                  Total
+                </th>
+                <th className="table__head u-text-center">
+                  Date
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              { this.renderTransactions(this.props.data) }
+            </tbody>
+          </table>
+        )}
       </div>
     )
   }
 }
+
+export default connect(
+  state => ({
+    ...state.transactions
+  }), {
+    fetchTransactions
+  }
+)(Transactions)

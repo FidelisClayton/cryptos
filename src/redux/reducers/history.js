@@ -17,12 +17,14 @@ const historyReducer = (state = initialState, action) => {
       }
 
     case actions.FETCH_HISTORY_SUCCESS:
+      const data = action.payload.val()
+
       return {
         ...state,
         loading: false,
         loaded: true,
         error: null,
-        data: Object.values(action.payload)
+        data: Object.values(data)
       }
 
     case actions.FETCH_HISTORY_FAIL:

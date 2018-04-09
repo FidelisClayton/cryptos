@@ -70,5 +70,13 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
+  },
+  resolve: {
+    alias: {
+      '@redux': path.resolve(__dirname, 'src', 'redux'),
+      '@components': path.resolve(__dirname, 'src', 'components'),
+      '@containers': path.resolve(__dirname, 'src', 'containers'),
+      '@helpers': path.resolve(__dirname, 'src', 'helpers')
+    }
   }
 }

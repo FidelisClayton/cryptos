@@ -11,10 +11,10 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-import CustomTooltip from '../components/CustomTooltip'
-import { fetchHistory } from '../redux/actions/history'
+import CustomTooltip from '@components/CustomTooltip'
+import { fetchHistory } from '@redux/actions/history'
 
-const styles ={
+const styles = {
   line: {
     top: 5,
     right: 30,
